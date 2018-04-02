@@ -1,9 +1,9 @@
 import { CREATE_DECK, CREATE_CARD, DELETE_CARD, DELETE_DECK, LIST_DECK } from '../actions';
 
-const decks = ( state = { temp = {}, decks = [] }, action ) => {
+export const decks = ( state = { temp: {}, decks: [] }, action ) => {
 	switch ( action.type ) {
 		case CREATE_DECK :
-			const { deck } = action;
+			let { deck } = action;
 
 			return {
 				...state,
@@ -12,7 +12,7 @@ const decks = ( state = { temp = {}, decks = [] }, action ) => {
 		case CREATE_CARD :
 			const { card } = action;
 
-			const deck = state.temp;
+			deck = state.temp;
 
 			const arrayCards = deck.cards.filter( c => c.id !== card.id);
 			arrayCards.push( card );
@@ -25,12 +25,15 @@ const decks = ( state = { temp = {}, decks = [] }, action ) => {
 			}
 
 		case DELETE_CARD :
-			const { deck } = action
+			deck = action.deck;
 
-			
+
 		case DELETE_DECK :
 		case LIST_DECK :
+			const { decks } = action;
+
+			
 		default :
-		return { };
+		return state;
 	}
 }

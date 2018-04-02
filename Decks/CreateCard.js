@@ -7,6 +7,12 @@ class CreateCard extends Component {
 		cards: []
 	}
 
+	salveCard = ( _ev ) => {
+		console.log( _ev );
+
+		navigation.goBack();
+	}
+
 	render( ) {
 		const { navigation } = this.props
 		return (
@@ -20,7 +26,7 @@ class CreateCard extends Component {
 					<TextInput style={ styles.input } underlineColorAndroid='skyblue'/>
 				</View>
 				<View style={ styles.fieldCentered } >
-					<Button title='Salvar' onPress={ () => navigation.goBack() } />
+					<Button title='Salvar' onPress={ ( event ) => this.salveCard( event )  } />
 				</View>
 			</View>
 		) ;

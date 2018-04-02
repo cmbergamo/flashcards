@@ -6,7 +6,7 @@ export const createDeck = () => {
 	}
 }
 
-export const CEATE_CARD = 'CREATE_CARD';
+export const CREATE_CARD = 'CREATE_CARD';
 
 export const createCard = () => {
 	return {

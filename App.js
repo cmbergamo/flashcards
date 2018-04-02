@@ -16,6 +16,10 @@ import Card from './Components/Card';
 import CreateCard from './Decks/CreateCard';
 import CreateDeck from './Decks/CreateDeck';
 import { StackNavigator, DrawerNavigator } from 'react-navigation';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import { decks } from './reducers';
+
 
 const instructions = Platform.select({
 	ios: 'Press Cmd+R to reload,\n' +
@@ -28,11 +32,13 @@ export default class App extends Component<Props> {
 
 	render() {
 		return (
-			<View style={ { flex: 1 } } >
-				<Stack style={ styles.container } />
-				<Drawer />
-				{/* <Button title={ 'Drawer' } onPress={ () => navigation.navigate('DrawerOpen') } /> */}
-			</View>
+			<Provider store={ createStore( decks ) } >
+				<View style={ { flex: 1 } } >
+					<Stack style={ styles.container } />
+					<Drawer />
+					{/* <Button title={ 'Drawer' } onPress={ () => navigation.navigate('DrawerOpen') } /> */}
+				</View>
+			</Provider>
 		);
 	}
 
