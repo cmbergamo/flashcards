@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, StyleSheet, Button } from 'react-native';
+import { connect } from 'react-redux';
+import { createCard } from '../actions';
 
 class CreateCard extends Component {
 	
 	state = {
-		cards: []
+		pergunta: '',
+		resposta: ''
 	}
 
-	salveCard = ( _ev ) => {
-		console.log( _ev );
+	salveCard( ) {
 
-		navigation.goBack();
+		this.props.dispatch( createCard( { card: this.state } ) );
+		this.props.navigation.goBack();
+
 	}
 
 	render( ) {
@@ -19,14 +23,18 @@ class CreateCard extends Component {
 			<View style={ styles.body } >
 				<View style={ styles.field } >
 					<Text style={ styles.label } >Pergunta:</Text>
-					<TextInput style={ styles.input } underlineColorAndroid='skyblue'/>
+					<TextInput style={ styles.input }
+						underlineColorAndroid='skyblue'
+						onChangeText={ ( pergunta ) => this.setState( { pergunta } ) } />
 				</View>
 				<View style={ styles.field } >
 					<Text style={ styles.label } >Resposta:</Text>
-					<TextInput style={ styles.input } underlineColorAndroid='skyblue'/>
+					<TextInput style={ styles.input }
+						underlineColorAndroid='skyblue'
+						onChangeText={ ( resposta ) => this.setState( { resposta } ) } />
 				</View>
 				<View style={ styles.fieldCentered } >
-					<Button title='Salvar' onPress={ ( event ) => this.salveCard( event )  } />
+					<Button title='Salvar' onPress={ () => this.salveCard( )  } />
 				</View>
 			</View>
 		) ;
@@ -71,4 +79,4 @@ const styles = StyleSheet.create( {
 	}
 } )
 
-export default CreateCard;
+export default connect( )( CreateCard );

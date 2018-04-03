@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, StyleSheet, Button, Animated } from 'react-native';
 import CreateCard from './CreateCard';
+import { connect } from 'react-redux';
 
 class CreateDeck extends Component {
 	
@@ -8,7 +9,7 @@ class CreateDeck extends Component {
 		cards: [],
 	}
 
-	addCard = () => {
+	addCard( ) {
 		const { height } = this.state;
 		
 		/* this.setState( () => {
@@ -19,6 +20,15 @@ class CreateDeck extends Component {
 
 			return { cards: array };
 		}) */
+	}
+
+	componentWillMount( ) {
+		this.setState( { cards: this.props.cards } );
+	}
+
+	componentWillUpdate( newProps, newState ) {
+		if ( newProps.cards != this.props.cards )
+			this.setState( { cards: newProps.cards } );
 	}
 
 	render( ) {
@@ -85,4 +95,11 @@ const styles = StyleSheet.create( {
 	}
 } )
 
-export default CreateDeck;
+const mapStateToProps = ( state, props ) => {
+	const { temp } = state;
+	const cards =  temp.cards || [];
+
+	return { cards }
+}
+
+export default connect( mapStateToProps )( CreateDeck );

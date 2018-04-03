@@ -8,9 +8,10 @@ export const createDeck = () => {
 
 export const CREATE_CARD = 'CREATE_CARD';
 
-export const createCard = () => {
+export const createCard = ( card ) => {
 	return {
-		type: CREATE_CARD
+		type: CREATE_CARD,
+		card
 	}
 }
 

@@ -13,11 +13,12 @@ export const decks = ( state = { temp: {}, decks: [] }, action ) => {
 			const { card } = action;
 
 			deck = state.temp;
-
-			const arrayCards = deck.cards.filter( c => c.id !== card.id);
+			const arrayCards = deck.cards ? deck.cards.filter( c => c.id !== card.id) : [];
 			arrayCards.push( card );
 
 			deck.cards = arrayCards;
+
+			console.log( deck );
 
 			return {
 				...state,
@@ -26,7 +27,6 @@ export const decks = ( state = { temp: {}, decks: [] }, action ) => {
 
 		case DELETE_CARD :
 			deck = action.deck;
-
 
 		case DELETE_DECK :
 		case LIST_DECK :

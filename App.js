@@ -36,7 +36,6 @@ export default class App extends Component<Props> {
 				<View style={ { flex: 1 } } >
 					<Stack style={ styles.container } />
 					<Drawer />
-					{/* <Button title={ 'Drawer' } onPress={ () => navigation.navigate('DrawerOpen') } /> */}
 				</View>
 			</Provider>
 		);
