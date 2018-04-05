@@ -27,17 +27,16 @@ class CreateDeck extends Component {
 	}
 
 	componentWillReceiveProps( nextProps ) {
-		if ( nextProps.cards != this.props.cards ) {
+		// if ( nextProps.cards ) {
 			console.log( "CreateDeck", nextProps.cards );
 			// if ( newProps.cards != this.props.cards ) {
 			// this.setState( { cards: newProps.cards } );
 			this.setState( { cards: nextProps.cards } );
-		}
+		// }
 	}
 
 	render( ) {
-		const { height } = this.state;
-		
+		console.log( this.props.cards );
 		return (
 			<View style={ styles.body } >
 				<View style={ styles.field } >
@@ -99,9 +98,13 @@ const styles = StyleSheet.create( {
 	}
 } )
 
-const mapStateToProps = ( state, props ) => {
+function mapStateToProps( state, props ) {
 	const { temp } = state;
-	const cards =  temp.cards || [];
+
+	let cards =  [];
+
+	if ( temp.cards )
+		cards = temp.cards;
 
 	console.log( "StateToProps", cards );
 
