@@ -6262,6 +6262,10 @@ smart-buffer@^1.0.13:
   version "1.1.15"
   resolved "https://registry.yarnpkg.com/smart-buffer/-/smart-buffer-1.1.15.tgz#7f114b5b65fab3e2a35aa775bb12f0d1c649bf16"
 
+smart-buffer@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/smart-buffer/-/smart-buffer-4.0.1.tgz#07ea1ca8d4db24eb4cac86537d7d18995221ace3"
+
 snake-case@^1.1.0:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/snake-case/-/snake-case-1.1.2.tgz#0c2f25e305158d9a18d3d977066187fef8a5a66a"
@@ -6313,6 +6317,13 @@ socks-proxy-agent@^3.0.0:
   dependencies:
     agent-base "^4.1.0"
     socks "^1.1.10"
+
+socks@2.1.6:
+  version "2.1.6"
+  resolved "https://registry.yarnpkg.com/socks/-/socks-2.1.6.tgz#684d98e137bdba484f3f4b13bacecb9fa5acc597"
+  dependencies:
+    ip "^1.1.5"
+    smart-buffer "^4.0.1"
 
 socks@^1.1.10:
   version "1.1.10"

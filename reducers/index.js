@@ -8,7 +8,8 @@ export const decks = ( state = { temp: {}, decks: [] }, action ) => {
 			return {
 				...state,
 				temp: deck
-			}
+			};
+
 		case CREATE_CARD :
 			const { card } = action;
 
@@ -31,8 +32,7 @@ export const decks = ( state = { temp: {}, decks: [] }, action ) => {
 		case LIST_DECK :
 			const { decks } = action;
 
-			
 		default :
-		return state;
+			return state;
 	}
 }

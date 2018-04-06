@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import { View, Text, TextInput, StyleSheet, Button, Animated } from 'react-native';
 import CreateCard from './CreateCard';
 import { connect } from 'react-redux';
+import { createDeck } from '../actions';
 
 class CreateDeck extends Component {
 	
 	state = {
-		cards: [],
+		titulo: '',
+		cards: []
 	}
 
 	addCard( ) {
@@ -23,15 +25,23 @@ class CreateDeck extends Component {
 	}
 
 	componentWillMount( ) {
-		this.setState( { cards: this.props.cards } );
+		this.props.dispatch( createDeck( this.state ) );
+
+		if ( this.props.cards )
+			this.setState( { cards: this.props.cards } );
 	}
 
-	componentWillReceiveProps( nextProps ) {
+	
+
+	static getDerivedStateFromProps( nextProps, prevState ) {
 		// if ( nextProps.cards ) {
 			console.log( "CreateDeck", nextProps.cards );
 			// if ( newProps.cards != this.props.cards ) {
 			// this.setState( { cards: newProps.cards } );
-			this.setState( { cards: nextProps.cards } );
+			console.log( prevState );
+
+			return { cards: nextProps.cards }
+			//this.setState( { cards: nextProps.cards } );
 		// }
 	}
 

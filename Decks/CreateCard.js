@@ -13,8 +13,7 @@ class CreateCard extends Component {
 	salveCard( ) {
 
 		this.props.dispatch( createCard( { card: this.state } ) );
-		this.props.navigation.goBack();
-
+		this.props.navigation.navigate( 'Deck' );
 	}
 
 	render( ) {
