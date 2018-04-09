@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, StyleSheet, Button, Animated } from 'react-native';
-import CreateCard from './CreateCard';
-import { connect } from 'react-redux';
-import { createDeck } from '../actions';
+import { inject, observer } from 'mobx-react';
 
+@inject('store') @observer
 class CreateDeck extends Component {
 	
 	state = {
@@ -24,37 +23,21 @@ class CreateDeck extends Component {
 		}) */
 	}
 
-	componentWillMount( ) {
-		this.props.dispatch( createDeck( this.state ) );
-
-		if ( this.props.cards )
-			this.setState( { cards: this.props.cards } );
-	}
-
-	
-
-	static getDerivedStateFromProps( nextProps, prevState ) {
-		// if ( nextProps.cards ) {
-			console.log( "CreateDeck", nextProps.cards );
-			// if ( newProps.cards != this.props.cards ) {
-			// this.setState( { cards: newProps.cards } );
-			console.log( prevState );
-
-			return { cards: nextProps.cards }
-			//this.setState( { cards: nextProps.cards } );
-		// }
-	}
+/* 	static getDerivedStateFromProps( nextProps, prevState ) {
+			return null;
+	} */
 
 	render( ) {
-		console.log( this.props.cards );
+
 		return (
 			<View style={ styles.body } >
+				<Text>Teste</Text>
 				<View style={ styles.field } >
 					<Text style={ styles.label } >Título:</Text>
 					<TextInput style={ styles.input } underlineColorAndroid='skyblue'/>
 				</View>
 				<View style={ styles.field } >
-					<Text style={ styles.label } >Total Cards: { this.state.cards.length }</Text>
+					<Text style={ styles.label } >Total Cards: 0 </Text>
 					<Button title='Adic. Cartão' onPress={ () => this.props.navigation.navigate( 'Card' ) } />
 				</View>
 				<View style={ styles.fieldCentered } >
@@ -108,17 +91,4 @@ const styles = StyleSheet.create( {
 	}
 } )
 
-function mapStateToProps( state, props ) {
-	const { temp } = state;
-
-	let cards =  [];
-
-	if ( temp.cards )
-		cards = temp.cards;
-
-	console.log( "StateToProps", cards );
-
-	return { cards }
-}
-
-export default connect( mapStateToProps )( CreateDeck );
+export default CreateDeck;

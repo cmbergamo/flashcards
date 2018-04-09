@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, StyleSheet, Button } from 'react-native';
-import { connect } from 'react-redux';
-import { createCard } from '../actions';
+import { inject, observer } from 'mobx-react';
 
+@inject('store') @observer
 class CreateCard extends Component {
 	
 	state = {
@@ -11,12 +11,13 @@ class CreateCard extends Component {
 	}
 
 	salveCard( ) {
-
-		this.props.dispatch( createCard( { card: this.state } ) );
+		this.props.store.CreateCard( this.state );
+		// this.props.dispatch( createCard( { card: this.state } ) );
 		this.props.navigation.navigate( 'Deck' );
 	}
 
 	render( ) {
+		console.log( this.props.store );
 		const { navigation } = this.props
 		return (
 			<View style={ styles.body } >
@@ -78,4 +79,4 @@ const styles = StyleSheet.create( {
 	}
 } )
 
-export default connect( )( CreateCard );
+export default CreateCard;

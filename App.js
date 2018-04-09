@@ -16,10 +16,8 @@ import Card from './Components/Card';
 import CreateCard from './Decks/CreateCard';
 import CreateDeck from './Decks/CreateDeck';
 import { StackNavigator, DrawerNavigator } from 'react-navigation';
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
-import { decks } from './reducers';
-
+import { Provider } from 'mobx-react';
+import store from './mobx/Store';
 
 const instructions = Platform.select({
 	ios: 'Press Cmd+R to reload,\n' +
@@ -32,7 +30,7 @@ export default class App extends Component<Props> {
 
 	render() {
 		return (
-			<Provider store={ createStore( decks ) } >
+			<Provider store={ store }>
 				<View style={ { flex: 1 } } >
 					<Stack style={ styles.container } />
 					<Drawer />
