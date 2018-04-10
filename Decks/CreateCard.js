@@ -11,7 +11,7 @@ class CreateCard extends Component {
 	}
 
 	salveCard( ) {
-		this.props.store.CreateCard( this.state );
+		this.props.store.createCard( this.state );
 		// this.props.dispatch( createCard( { card: this.state } ) );
 		this.props.navigation.navigate( 'Deck' );
 	}
