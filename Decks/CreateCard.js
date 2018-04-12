@@ -12,8 +12,9 @@ class CreateCard extends Component {
 
 	salveCard( ) {
 		this.props.store.createCard( this.state );
+		console.log("Voltou");
 		// this.props.dispatch( createCard( { card: this.state } ) );
-		this.props.navigation.navigate( 'Deck' );
+		this.props.navigation.pop();
 	}
 
 	render( ) {

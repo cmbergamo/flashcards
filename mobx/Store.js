@@ -1,24 +1,21 @@
 
-import { observable, computed } from "mobx";
+import { observable, computed, decorate, action } from "mobx";
 
 class Store {
 	
-	@observable decks
-	@observable temp
+	decks = [];
+	temp = { title: '', cards: [] };
 
-	constructor() {
+	/* constructor() {
 		this.decks = [];
 		this.temp = { title: '', cards: [] };
+	} */
+
+	get totalCards() {
+		return this.temp.cards.length;
 	}
 
-	totalCards = function() {
-		if ( this.temp.cards )
-			return 0;
-		else
-			return this.temp.cards.lenght;
-	}
-
-	createCard = function( _card ) {
+	createCard( _card ) {
 		console.log('criando cartão');
 		if ( this.temp.cards )
 			this.temp.cards.push( _card );
@@ -40,6 +37,13 @@ class Store {
 			return this.decks[ _index ].title;
 	} */
 }
+
+decorate( Store, {
+	decks: observable,
+	temp: observable,
+	// totalCards: computed,
+	createCard: action
+} )
 
 /* Store.prototype.createCard = function( _deck ) {
 	this.temp = _deck;	

@@ -28,7 +28,7 @@ class CreateDeck extends Component {
 	} */
 
 	render( ) {
-		console.log( this.props.store.totalCards() );
+		console.log( this.props.store.totalCards );
 		
 		return (
 			<View style={ styles.body } >
@@ -38,7 +38,7 @@ class CreateDeck extends Component {
 					<TextInput style={ styles.input } underlineColorAndroid='skyblue'/>
 				</View>
 				<View style={ styles.field } >
-					<Text style={ styles.label } >Total Cards: { this.props.store.totalCards() } </Text>
+					<Text style={ styles.label } >Total Cards: { this.props.store.totalCards }</Text>
 					<Button title='Adic. Cartão' onPress={ () => this.props.navigation.navigate( 'Card' ) } />
 				</View>
 				<View style={ styles.fieldCentered } >
