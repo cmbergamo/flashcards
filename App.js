@@ -31,10 +31,10 @@ export default class App extends Component<Props> {
 	render() {
 		return (
 			<Provider store={ store }>
-				<View style={ { flex: 1 } } >
-					<Stack style={ styles.container } />
+				{/* <View style={ { flex: 1 } } >
+					<Stack style={ styles.container } /> */}
 					<Drawer />
-				</View>
+				{/* </View> */}
 			</Provider>
 		);
 	}
@@ -55,17 +55,12 @@ const Stack = StackNavigator( {
 
 const Drawer = DrawerNavigator ( {
 	Home: {
-		screen: CreateDeck,
+		screen: TesteHome,
 		navigationOptions: {
 			drawerLabel: 'Uhull'
 		}
 	},
-	Card: {
-		screen: Card,
-		navigationOptions: {
-			drawerLabel: 'Mostra o Card!'
-		}
-	}
+
 } );
 
 const styles = StyleSheet.create({
@@ -90,3 +85,12 @@ const styles = StyleSheet.create({
 		margin: 2
 	}
 });
+
+function TesteHome( props ) {
+	return (
+		<View>
+			<Text>Home</Text>
+			<Button title="Abrir" onPress={ () => props.navigation.navigate("DrawerToggle") } />
+		</View>
+	);
+}

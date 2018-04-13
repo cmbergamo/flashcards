@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { View, Text, TextInput, StyleSheet, Button } from 'react-native';
 import { inject, observer } from 'mobx-react';
 
-@inject('store') @observer
 class CreateCard extends Component {
 	
 	state = {
@@ -12,14 +11,13 @@ class CreateCard extends Component {
 
 	salveCard( ) {
 		this.props.store.createCard( this.state );
-		console.log("Voltou");
 		// this.props.dispatch( createCard( { card: this.state } ) );
 		this.props.navigation.pop();
 	}
 
 	render( ) {
-		console.log( this.props.store );
-		const { navigation } = this.props
+		const { navigation } = this.props;
+
 		return (
 			<View style={ styles.body } >
 				<View style={ styles.field } >
@@ -80,4 +78,4 @@ const styles = StyleSheet.create( {
 	}
 } )
 
-export default CreateCard;
+export default inject( "store" )( observer( CreateCard ) );

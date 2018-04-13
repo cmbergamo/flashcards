@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { View, Text, TextInput, StyleSheet, Button, Animated } from 'react-native';
 import { inject, observer } from 'mobx-react';
 
-@inject('store') @observer
 class CreateDeck extends Component {
 	
 	state = {
@@ -28,7 +27,6 @@ class CreateDeck extends Component {
 	} */
 
 	render( ) {
-		console.log( this.props.store.totalCards );
 		
 		return (
 			<View style={ styles.body } >
@@ -92,4 +90,4 @@ const styles = StyleSheet.create( {
 	}
 } )
 
-export default CreateDeck;
+export default inject( "store" )( observer( CreateDeck ) );

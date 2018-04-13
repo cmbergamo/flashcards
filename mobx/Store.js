@@ -16,11 +16,15 @@ class Store {
 	}
 
 	createCard( _card ) {
-		console.log('criando cartão');
+		
 		if ( this.temp.cards )
 			this.temp.cards.push( _card );
 		else
 			this.temp.cards = [ _card ];
+	}
+
+	createDeck( _deck ) {
+		
 	}
 
 	/* @computed get totalCards() {
@@ -30,18 +34,18 @@ class Store {
 			return this.temp.cards.lenght;
 	} */
 
-	/*@computed get title( _index ) {
+	get title( _index ) {
 		if ( _index < 0 )
 			return this.temp.title;
 		else
 			return this.decks[ _index ].title;
-	} */
+	}
 }
 
 decorate( Store, {
 	decks: observable,
 	temp: observable,
-	// totalCards: computed,
+	totalCards: computed,
 	createCard: action
 } )
 
