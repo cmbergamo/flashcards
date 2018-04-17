@@ -15,6 +15,7 @@ import {
 import Card from './Components/Card';
 import CreateCard from './Decks/CreateCard';
 import CreateDeck from './Decks/CreateDeck';
+import SideMenu from './Components/SideMenu';
 import { StackNavigator, DrawerNavigator } from 'react-navigation';
 import { Provider } from 'mobx-react';
 import store from './mobx/Store';
@@ -61,7 +62,17 @@ const Drawer = DrawerNavigator ( {
 		}
 	},
 
-} );
+	CDeck: {
+		screen: CreateDeck,
+		navigationOptions: {
+			drawerLabel: 'Criar Deck'
+		}
+	}
+
+},
+{
+	initialRouteName: 'CDeck',
+}  );
 
 const styles = StyleSheet.create({
 	container: {

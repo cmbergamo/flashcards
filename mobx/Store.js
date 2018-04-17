@@ -34,12 +34,12 @@ class Store {
 			return this.temp.cards.lenght;
 	} */
 
-	get title( _index ) {
+	/* get title( _index ) {
 		if ( _index < 0 )
 			return this.temp.title;
 		else
 			return this.decks[ _index ].title;
-	}
+	} */
 }
 
 decorate( Store, {

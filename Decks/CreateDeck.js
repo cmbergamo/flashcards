@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, StyleSheet, Button, Animated } from 'react-native';
 import { inject, observer } from 'mobx-react';
+import SideMenu from '../Components/SideMenu';
 
 class CreateDeck extends Component {
 	
@@ -30,7 +31,7 @@ class CreateDeck extends Component {
 		
 		return (
 			<View style={ styles.body } >
-				<Text>Teste</Text>
+				<SideMenu navigation={ this.props.navigation } />
 				<View style={ styles.field } >
 					<Text style={ styles.label } >Título:</Text>
 					<TextInput style={ styles.input } underlineColorAndroid='skyblue'/>
