@@ -3,13 +3,24 @@ import { observable, computed, decorate, action } from "mobx";
 
 class Store {
 	
-	decks = [];
+	decks = [
+		{ title: 'T1', cards: [
+			{ pergunta: 'p1', resposta: 'r1' }, { pergunta: 'p2', resposta: 'r2' }
+		] },
+		{ title: 'T2', cards: [
+			{ pergunta: 'p3', resposta: 'r3' }, { pergunta: 'p4', resposta: 'r4' }
+		]}
+	];
 	temp = { title: '', cards: [] };
 
 	/* constructor() {
 		this.decks = [];
 		this.temp = { title: '', cards: [] };
 	} */
+
+	get listDecks() {
+		return this.decks;
+	}
 
 	get totalCards() {
 		return this.temp.cards.length;
@@ -46,6 +57,7 @@ decorate( Store, {
 	decks: observable,
 	temp: observable,
 	totalCards: computed,
+	listDecks: computed,
 	createCard: action
 } )
 

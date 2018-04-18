@@ -16,6 +16,7 @@ import Card from './Components/Card';
 import CreateCard from './Decks/CreateCard';
 import CreateDeck from './Decks/CreateDeck';
 import SideMenu from './Components/SideMenu';
+import ListDecks from './Decks/ListDecks';
 import { StackNavigator, DrawerNavigator } from 'react-navigation';
 import { Provider } from 'mobx-react';
 import store from './mobx/Store';
@@ -56,12 +57,17 @@ const Stack = StackNavigator( {
 
 const Drawer = DrawerNavigator ( {
 	Home: {
+		screen: ListDecks,
+		navigationOptions: {
+			drawerLabel: 'Listar Decks'
+		}
+	},
+	Teste: {
 		screen: TesteHome,
 		navigationOptions: {
 			drawerLabel: 'Uhull'
 		}
 	},
-
 	CDeck: {
 		screen: CreateDeck,
 		navigationOptions: {
@@ -71,7 +77,7 @@ const Drawer = DrawerNavigator ( {
 
 },
 {
-	initialRouteName: 'CDeck',
+	initialRouteName: 'Home',
 }  );
 
 const styles = StyleSheet.create({
