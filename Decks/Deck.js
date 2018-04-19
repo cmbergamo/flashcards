@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import { inject, observer } from 'mobx-react';
 
 const Deck = ( props ) => {
-	const { store } = props.;
+	const { store } = props;
 	return (
 		<View>
 			<Text>Deck</Text>

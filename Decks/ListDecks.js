@@ -43,16 +43,4 @@ const style = StyleSheet.create({
 	}
 });
 
-const Stack = StackNavigator( {
-	Card: {
-		screen: CreateCard
-	},
-	Deck: {
-		screen: CreateDeck
-	}
-},
-{
-	initialRouteName: 'Deck',
-} );
-
 export default inject( "store" )( observer( ListDecks ) );
