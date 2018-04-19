@@ -17,15 +17,17 @@ const ListDecks = ( props ) => {
 
 	return (
 		<View style={ style.container } >
-			{ store.listDecks.map( ( deck ) => {
-					return (
-						<TouchableOpacity>
-							<Text>{ deck.title }</Text>
-							<Text>Cartões: { deck.cards.length }</Text>
-						</TouchableOpacity>
-					)
-			}
-			 ) }
+			<Stack>
+				{ store.listDecks.map( ( deck ) => {
+						return (
+							<TouchableOpacity>
+								<Text>{ deck.title }</Text>
+								<Text>Cartões: { deck.cards.length }</Text>
+							</TouchableOpacity>
+						)
+					}
+				) }
+			</Stack>
 		</View>
 	);
 };
@@ -40,5 +42,17 @@ const style = StyleSheet.create({
 		backgroundColor: 'white',
 	}
 });
+
+const Stack = StackNavigator( {
+	Card: {
+		screen: CreateCard
+	},
+	Deck: {
+		screen: CreateDeck
+	}
+},
+{
+	initialRouteName: 'Deck',
+} );
 
 export default inject( "store" )( observer( ListDecks ) );

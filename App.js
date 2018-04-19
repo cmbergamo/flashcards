@@ -10,7 +10,8 @@ import {
 	StyleSheet,
 	Text,
 	View,
-	Button
+	Button,
+	StatusBar
 } from 'react-native';
 import Card from './Components/Card';
 import CreateCard from './Decks/CreateCard';
@@ -33,10 +34,8 @@ export default class App extends Component<Props> {
 	render() {
 		return (
 			<Provider store={ store }>
-				{/* <View style={ { flex: 1 } } >
-					<Stack style={ styles.container } /> */}
-					<Drawer />
-				{/* </View> */}
+					{/* <Stack style={ styles.container } /> */}
+				<Drawer style={ { marginTop: 100, padding: 50 } } />
 			</Provider>
 		);
 	}
