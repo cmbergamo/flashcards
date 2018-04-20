@@ -11,23 +11,17 @@ import { inject, observer } from 'mobx-react';
 const ListDecks = ( props ) => {
 	const { store } = props;
 
-	console.log( store );
-
-	console.log( store.listDecks );
-
 	return (
 		<View style={ style.container } >
-			<Stack>
-				{ store.listDecks.map( ( deck ) => {
+				{ store.listDecks.map( ( deck, ordem ) => {
 						return (
-							<TouchableOpacity>
+							<TouchableOpacity onPress={ () => props.navigation.navigate( 'Deck', { ordem } ) } >
 								<Text>{ deck.title }</Text>
 								<Text>Cartões: { deck.cards.length }</Text>
 							</TouchableOpacity>
 						)
 					}
 				) }
-			</Stack>
 		</View>
 	);
 };

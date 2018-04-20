@@ -1,6 +1,8 @@
 import React from 'react';
 import { StackNavigator } from 'react-navigation';
-import Deck from '·/Deck';
+import Deck from './Deck';
+import Card from './Card';
+import ListDecks from './ListDecks';
 
 const Stack = StackNavigator( {
 	Home: {
@@ -8,6 +10,9 @@ const Stack = StackNavigator( {
 	},
 	Deck: {
 		screen: Deck
+	},
+	Card: {
+		screen: Card
 	}
 },
 {
