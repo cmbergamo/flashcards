@@ -1,16 +1,33 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View, Text, Button } from 'react-native';
 
-const Card = ( props ) => {
-	const { cards, pos } = props.navigation.state.params;
-	const card = cards[ pos ];
-	return (
-		<View>
-			<Text>{ card.pergunta }</Text>
-			<Text>{ card.resposta }</Text>
-			<Button title='Próxima' onPress={ () => props.navigation.navigate( 'Card', { cards, pos: ++pos } ) } />
-		</View>
-	);
+class Card extends Component {
+
+	state = {
+		answer: false
+	}
+
+	render() {
+		const { cards, pos } = this.props.navigation.state.params;
+		const card = cards[ pos ];
+
+		const next = cards.length > pos + 1 &&
+			( <Button title='Próxima' onPress={ () => this.props.navigation.navigate( 'Card', { cards, pos: pos+1 } ) } /> );
+
+		return (
+			<View>
+				<Text>{ card.pergunta }</Text>
+				{ this.state.answer ? [ 
+						( <Text>{ card.resposta }</Text> ),
+						{ next }
+					]: (
+						<Button title='Mostrar Resposta' onPress={ () => this.setState( { answer: true } ) } />
+					)
+				}
+				
+			</View>
+		);
+	}
 }
 
 export default Card;
