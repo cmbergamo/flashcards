@@ -4,11 +4,11 @@ import { observable, computed, decorate, action } from "mobx";
 class Store {
 	
 	decks = [
-		{ title: 'T1', cards: [
-			{ pergunta: 'p1', resposta: 'r1' }, { pergunta: 'p2', resposta: 'r2' }
+		{ id: '201804391' , title: 'T1', cards: [
+			{ id: '20180439c1', pergunta: 'p1', resposta: 'r1' }, { id: '20180439c2', pergunta: 'p2', resposta: 'r2' }
 		] },
-		{ title: 'T2', cards: [
-			{ pergunta: 'p3', resposta: 'r3' }, { pergunta: 'p4', resposta: 'r4' }
+		{ id: '201804392' , title: 'T2', cards: [
+			{ id: '20180439c3', pergunta: 'p3', resposta: 'r3' }, { id: '20180439c4', pergunta: 'p4', resposta: 'r4' }
 		]}
 	];
 	temp = { title: '', cards: [] };
@@ -38,6 +38,10 @@ class Store {
 		
 	}
 
+	get onCreationCards() {
+		return this.temp.cards;
+	}
+
 	/* @computed get totalCards() {
 		if ( this.temp.cards )
 			return 0;
@@ -58,6 +62,7 @@ decorate( Store, {
 	temp: observable,
 	totalCards: computed,
 	listDecks: computed,
+	onCreationCards: computed,
 	createCard: action
 } )
 

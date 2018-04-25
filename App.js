@@ -36,23 +36,23 @@ export default class App extends Component<Props> {
 		return (
 			<Provider store={ store }>
 					{/* <Stack style={ styles.container } /> */}
-				<Drawer style={ { marginTop: 100, padding: 50 } } />
+				<Drawer style={ { flex: 1 } } />
 			</Provider>
 		);
 	}
 
 }
 
-const Stack = StackNavigator( {
-	Card: {
+const StackCreate = StackNavigator( {
+	CCard: {
 		screen: CreateCard
 	},
-	Deck: {
+	CDeck: {
 		screen: CreateDeck
 	}
 },
 {
-	initialRouteName: 'Deck',
+	initialRouteName: 'CDeck',
 } );
 
 const Drawer = DrawerNavigator ( {
@@ -68,8 +68,8 @@ const Drawer = DrawerNavigator ( {
 			drawerLabel: 'Uhull'
 		}
 	},
-	CDeck: {
-		screen: CreateDeck,
+	Create: {
+		screen: StackCreate,
 		navigationOptions: {
 			drawerLabel: 'Criar Deck'
 		}

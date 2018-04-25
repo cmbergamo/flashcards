@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, StyleSheet, Button, Animated } from 'react-native';
+import { View, Text, TextInput, StyleSheet, Button, Animated, TouchableOpacity } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import SideMenu from '../Components/SideMenu';
+import { MaterialIcons } from '@expo/vector-icons';
 
 class CreateDeck extends Component {
 	
@@ -28,6 +29,7 @@ class CreateDeck extends Component {
 	} */
 
 	render( ) {
+		console.log( this.props.navigation );
 		
 		return (
 			<View style={ styles.body } >
@@ -38,7 +40,20 @@ class CreateDeck extends Component {
 				</View>
 				<View style={ styles.field } >
 					<Text style={ styles.label } >Total Cards: { this.props.store.totalCards }</Text>
-					<Button title='Adic. Cartão' onPress={ () => this.props.navigation.navigate( 'Card' ) } />
+					<Button title='Adic. Cartão' onPress={ () => this.props.navigation.navigate( 'CCard' ) } />
+				</View>
+				<View>
+					{ this.props.store.onCreationCards.map( ( card, ordem ) => {
+						return ( <View key={ ordem } style={ styles.listCards } >
+							<Text>{ card.pergunta }</Text>
+							<TouchableOpacity onPress={ () => props.navigation.navigate( "DrawerToggle" ) } >
+								<MaterialIcons name="edit" size={20} color="green" />
+							</TouchableOpacity>
+							<TouchableOpacity onPress={ () => props.navigation.navigate( "DrawerToggle" ) } >
+								<MaterialIcons name="delete" size={20} color="green" />
+							</TouchableOpacity>
+						</View> );
+					} )}
 				</View>
 				<View style={ styles.fieldCentered } >
 					<Button title='Salvar' onPress={ () => console.log('teste') } />
@@ -58,6 +73,13 @@ class CreateDeck extends Component {
 const styles = StyleSheet.create( {
 	body: {
 		flex: 1,
+		alignItems: 'flex-start',
+		justifyContent: 'flex-start',
+		padding: 5,
+		backgroundColor: 'white'
+	},
+	listCards: {
+		flexDirection: 'row',
 		alignItems: 'flex-start',
 		justifyContent: 'flex-start',
 		padding: 5,

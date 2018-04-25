@@ -12,14 +12,14 @@ class Card extends Component {
 		const card = cards[ pos ];
 
 		const next = cards.length > pos + 1 &&
-			( <Button title='Próxima' onPress={ () => this.props.navigation.navigate( 'Card', { cards, pos: pos+1 } ) } /> );
+			( <Button key={ 2 } title='Próxima' onPress={ () => this.props.navigation.navigate( 'Card', { cards, pos: pos+1 } ) } /> );
 
 		return (
 			<View>
 				<Text>{ card.pergunta }</Text>
 				{ this.state.answer ? [ 
-						( <Text>{ card.resposta }</Text> ),
-						{ next }
+						( <Text key={ 1 } >{ card.resposta }</Text> ),
+						( next )
 					]: (
 						<Button title='Mostrar Resposta' onPress={ () => this.setState( { answer: true } ) } />
 					)
