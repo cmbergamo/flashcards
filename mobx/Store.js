@@ -26,20 +26,37 @@ class Store {
 		return this.temp.cards.length;
 	}
 
+	get onCreationCards() {
+		return this.temp.cards;
+	}
+
 	createCard( _card ) {
-		
-		if ( this.temp.cards )
-			this.temp.cards.push( _card );
-		else
-			this.temp.cards = [ _card ];
+		if ( _card.id ) {
+			const cards = this.temp.cards.filter( card => card.id !== _card.id )
+			cards.push( _card );
+
+			this.temp.cards = cards;
+		} else {
+			_card.id = Date.now();
+			
+			if ( this.temp.cards )
+				this.temp.cards.push( _card );
+			else
+				this.temp.cards = [ _card ];
+			
+		}
 	}
 
 	createDeck( _deck ) {
 		
 	}
 
-	get onCreationCards() {
-		return this.temp.cards;
+	removeCard( _id ) {
+		const newCards = this.temp.cards.filter( card => {
+			return card.id !== _id ;
+		});
+
+		this.temp.cards = newCards
 	}
 
 	/* @computed get totalCards() {
@@ -63,7 +80,8 @@ decorate( Store, {
 	totalCards: computed,
 	listDecks: computed,
 	onCreationCards: computed,
-	createCard: action
+	createCard: action,
+	removeCard: action
 } )
 
 /* Store.prototype.createCard = function( _deck ) {

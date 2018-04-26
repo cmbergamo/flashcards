@@ -11,8 +11,9 @@ class Card extends Component {
 		const { cards, pos } = this.props.navigation.state.params;
 		const card = cards[ pos ];
 
-		const next = cards.length > pos + 1 &&
-			( <Button key={ 2 } title='Próxima' onPress={ () => this.props.navigation.navigate( 'Card', { cards, pos: pos+1 } ) } /> );
+		const next = cards.length > pos + 1 ?
+			( <Button key={ 2 } title='Próxima' onPress={ () => this.props.navigation.navigate( 'Card', { cards, pos: pos+1 } ) } /> )
+			: ( <Button key={ 2 } title='Escolher outro Deck' onPress={ () => this.props.navigation.navigate( 'List' ) } /> )
 
 		return (
 			<View>

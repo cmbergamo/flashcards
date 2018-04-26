@@ -4,8 +4,8 @@ import Deck from './Deck';
 import Card from './Card';
 import ListDecks from './ListDecks';
 
-const Stack = StackNavigator( {
-	Home: {
+const ListNavigator = StackNavigator( {
+	List: {
 		screen: ListDecks
 	},
 	Deck: {
@@ -16,7 +16,7 @@ const Stack = StackNavigator( {
 	}
 },
 {
-	initialRouteName: 'Home',
+	initialRouteName: 'List',
 } );
 
-export default Stack;
+export default ListNavigator;

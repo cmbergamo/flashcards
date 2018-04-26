@@ -46,10 +46,10 @@ class CreateDeck extends Component {
 					{ this.props.store.onCreationCards.map( ( card, ordem ) => {
 						return ( <View key={ ordem } style={ styles.listCards } >
 							<Text>{ card.pergunta }</Text>
-							<TouchableOpacity onPress={ () => props.navigation.navigate( "DrawerToggle" ) } >
+							<TouchableOpacity onPress={ () => this.props.navigation.navigate( "CCard", { card } ) } >
 								<MaterialIcons name="edit" size={20} color="green" />
 							</TouchableOpacity>
-							<TouchableOpacity onPress={ () => props.navigation.navigate( "DrawerToggle" ) } >
+							<TouchableOpacity onPress={ () => this.props.store.removeCard( card.id ) } >
 								<MaterialIcons name="delete" size={20} color="green" />
 							</TouchableOpacity>
 						</View> );

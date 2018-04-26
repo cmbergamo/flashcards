@@ -15,6 +15,10 @@ class CreateCard extends Component {
 		this.props.navigation.pop();
 	}
 
+	componentWillUpdate( ) {
+		console.log( "montou" );
+	}
+
 	render( ) {
 		const { navigation } = this.props;
 
