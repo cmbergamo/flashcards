@@ -6,17 +6,37 @@ class CreateCard extends Component {
 	
 	state = {
 		pergunta: '',
-		resposta: ''
+		resposta: '',
+		card: {}
 	}
 
 	salveCard( ) {
-		this.props.store.createCard( this.state );
+		const { card, pergunta, resposta } = this.state;
+		card.pergunta = pergunta;
+		card.resposta = resposta;
+
+		this.props.store.createCard( card );
 		// this.props.dispatch( createCard( { card: this.state } ) );
 		this.props.navigation.pop();
 	}
 
-	componentWillUpdate( ) {
-		console.log( "montou" );
+	static getDerivedStateFromProps(nextProps, prevState) {
+
+		if ( nextProps.navigation && nextProps.navigation.state && nextProps.navigation.state.params && nextProps.navigation.state.params.card ) {
+			console.log( "Entrou" );
+			const { card } = nextProps.navigation.state.params;
+
+			const state = { card, pergunta: card.pergunta, resposta: card.resposta };
+
+			console.log( state );
+
+			return state;
+		}
+		
+		return null;
+
+		// return { pergunta: '', resposta: '', card: {} };
+
 	}
 
 	render( ) {
@@ -28,13 +48,13 @@ class CreateCard extends Component {
 					<Text style={ styles.label } >Pergunta:</Text>
 					<TextInput style={ styles.input }
 						underlineColorAndroid='skyblue'
-						onChangeText={ ( pergunta ) => this.setState( { pergunta } ) } />
+						onChangeText={ ( pergunta ) => this.setState( { pergunta } ) } value={ this.state.pergunta }/>
 				</View>
 				<View style={ styles.field } >
 					<Text style={ styles.label } >Resposta:</Text>
 					<TextInput style={ styles.input }
 						underlineColorAndroid='skyblue'
-						onChangeText={ ( resposta ) => this.setState( { resposta } ) } />
+						onChangeText={ ( resposta ) => this.setState( { resposta } ) } value={ this.state.resposta }/>
 				</View>
 				<View style={ styles.fieldCentered } >
 					<Button title='Salvar' onPress={ () => this.salveCard( )  } />

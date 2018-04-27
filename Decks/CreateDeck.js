@@ -12,7 +12,7 @@ class CreateDeck extends Component {
 	}
 
 	addCard( ) {
-		const { height } = this.state;
+		const { titulo } = this.state;
 		
 		/* this.setState( () => {
 			const { cards } = this.state;
@@ -29,7 +29,6 @@ class CreateDeck extends Component {
 	} */
 
 	render( ) {
-		console.log( this.props.navigation );
 		
 		return (
 			<View style={ styles.body } >

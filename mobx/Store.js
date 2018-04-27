@@ -48,7 +48,20 @@ class Store {
 	}
 
 	createDeck( _deck ) {
-		
+		if ( _deck.id ) {
+			const deck = this.decks.filter( d => d.id !== _deck.id );
+			deck.push( _deck );
+
+			this.decks = deck;
+		} else {
+
+			_deck.id = Date.now();
+			
+			if ( this.decks )
+				this.decks.push( _deck );
+			else
+				this.decks = [ _deck ];
+		}
 	}
 
 	removeCard( _id ) {
