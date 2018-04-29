@@ -20,8 +20,9 @@ import SideMenu from './Components/SideMenu';
 import ListDecks from './Decks/ListDecks';
 import ListNavigator from './Decks/ListNavigator';
 import { StackNavigator, DrawerNavigator } from 'react-navigation';
-import { Provider } from 'mobx-react';
+import { Provider, inject, observer } from 'mobx-react';
 import store from './mobx/Store';
+import { load } from './api/Storage';
 
 const instructions = Platform.select({
 	ios: 'Press Cmd+R to reload,\n' +
@@ -30,7 +31,7 @@ const instructions = Platform.select({
 });
 
 type Props = {};
-export default class App extends Component<Props> {
+class App extends Component<Props> {
 
 	render() {
 		return (
@@ -60,12 +61,6 @@ const Drawer = DrawerNavigator ( {
 		screen: ListNavigator,
 		navigationOptions: {
 			drawerLabel: 'Listar Decks'
-		}
-	},
-	Teste: {
-		screen: TesteHome,
-		navigationOptions: {
-			drawerLabel: 'Uhull'
 		}
 	},
 	Create: {
@@ -103,11 +98,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-function TesteHome( props ) {
-	return (
-		<View>
-			<Text>Home</Text>
-			<Button title="Abrir" onPress={ () => props.navigation.navigate("DrawerToggle") } />
-		</View>
-	);
-}
+export default App;

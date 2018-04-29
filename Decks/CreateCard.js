@@ -5,37 +5,29 @@ import { inject, observer } from 'mobx-react';
 class CreateCard extends Component {
 	
 	state = {
-		pergunta: '',
-		resposta: '',
-		card: {}
+		question: '',
+		answer: '',
+		id: 0,
 	}
 
 	salveCard( ) {
-		const { card, pergunta, resposta } = this.state;
-		card.pergunta = pergunta;
-		card.resposta = resposta;
+		const { save, question, answer, id } = this.state;
 
-		this.props.store.createCard( card );
-		// this.props.dispatch( createCard( { card: this.state } ) );
+		this.props.store.createCard( this.state );
+
 		this.props.navigation.pop();
 	}
 
 	static getDerivedStateFromProps(nextProps, prevState) {
+		let state = null;
 
 		if ( nextProps.navigation && nextProps.navigation.state && nextProps.navigation.state.params && nextProps.navigation.state.params.card ) {
-			console.log( "Entrou" );
 			const { card } = nextProps.navigation.state.params;
 
-			const state = { card, pergunta: card.pergunta, resposta: card.resposta };
-
-			console.log( state );
-
-			return state;
+			state = { id: card.id, question: card.question, answer: card.answer };
 		}
 		
-		return null;
-
-		// return { pergunta: '', resposta: '', card: {} };
+		return state;
 
 	}
 
@@ -48,13 +40,13 @@ class CreateCard extends Component {
 					<Text style={ styles.label } >Pergunta:</Text>
 					<TextInput style={ styles.input }
 						underlineColorAndroid='skyblue'
-						onChangeText={ ( pergunta ) => this.setState( { pergunta } ) } value={ this.state.pergunta }/>
+						onChangeText={ ( question ) => this.setState( { question } ) } value={ this.state.question }/>
 				</View>
 				<View style={ styles.field } >
 					<Text style={ styles.label } >Resposta:</Text>
 					<TextInput style={ styles.input }
 						underlineColorAndroid='skyblue'
-						onChangeText={ ( resposta ) => this.setState( { resposta } ) } value={ this.state.resposta }/>
+						onChangeText={ ( answer ) => this.setState( { answer } ) } value={ this.state.answer }/>
 				</View>
 				<View style={ styles.fieldCentered } >
 					<Button title='Salvar' onPress={ () => this.salveCard( )  } />

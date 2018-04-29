@@ -3,16 +3,22 @@ import { View, Text, TextInput, StyleSheet, Button, Animated, TouchableOpacity }
 import { inject, observer } from 'mobx-react';
 import SideMenu from '../Components/SideMenu';
 import { MaterialIcons } from '@expo/vector-icons';
+import { submityDeck } from '../api/Storage';
 
 class CreateDeck extends Component {
 	
 	state = {
-		titulo: '',
-		cards: []
+		title: '',
+		id: 0,
 	}
 
-	addCard( ) {
-		const { titulo } = this.state;
+	saveDeck( ) {
+		
+		this.props.store.createDeck( this.state );
+
+		submityDeck( this.props.store.listDecks );
+
+		this.props.navigation.navigate('Home');
 		
 		/* this.setState( () => {
 			const { cards } = this.state;
@@ -24,18 +30,29 @@ class CreateDeck extends Component {
 		}) */
 	}
 
-/* 	static getDerivedStateFromProps( nextProps, prevState ) {
-			return null;
-	} */
+ 	// static getDerivedStateFromProps( nextProps, prevState ) {
+	componentWillReceiveProps( nextProps ) {
+
+		if ( nextProps.navigation && nextProps.navigation.state && nextProps.navigation.state.params && nextProps.navigation.state.params.deck ) {
+			 const { deck } = nextProps.navigation.state.params;
+
+			return { title: deck.title, cards: deck.cards, id: deck.id };
+		
+		}
+
+		//return null;
+	}
 
 	render( ) {
-		
+	
 		return (
 			<View style={ styles.body } >
 				<SideMenu navigation={ this.props.navigation } />
 				<View style={ styles.field } >
 					<Text style={ styles.label } >Título:</Text>
-					<TextInput style={ styles.input } underlineColorAndroid='skyblue'/>
+					<TextInput style={ styles.input }
+						underlineColorAndroid='skyblue'
+						onChangeText={ ( title ) => this.setState( { title } ) } value={ this.state.title }/>
 				</View>
 				<View style={ styles.field } >
 					<Text style={ styles.label } >Total Cards: { this.props.store.totalCards }</Text>
@@ -44,8 +61,8 @@ class CreateDeck extends Component {
 				<View>
 					{ this.props.store.onCreationCards.map( ( card, ordem ) => {
 						return ( <View key={ ordem } style={ styles.listCards } >
-							<Text>{ card.pergunta }</Text>
-							<TouchableOpacity onPress={ () => this.props.navigation.navigate( "CCard", { card } ) } >
+							<Text>{ card.question }</Text>
+							<TouchableOpacity onPress={ () => this.props.navigation.navigate( "CCard",  { card } ) } >
 								<MaterialIcons name="edit" size={20} color="green" />
 							</TouchableOpacity>
 							<TouchableOpacity onPress={ () => this.props.store.removeCard( card.id ) } >
@@ -55,7 +72,7 @@ class CreateDeck extends Component {
 					} )}
 				</View>
 				<View style={ styles.fieldCentered } >
-					<Button title='Salvar' onPress={ () => console.log('teste') } />
+					<Button title='Salvar' onPress={ () => this.saveDeck() } />
 				</View>
 
 				{/* <Animated.View style={ { height, bottom: 0, right: 0, left: 0, position: 'absolute' } }>

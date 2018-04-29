@@ -17,9 +17,9 @@ class Card extends Component {
 
 		return (
 			<View>
-				<Text>{ card.pergunta }</Text>
+				<Text>{ card.question }</Text>
 				{ this.state.answer ? [ 
-						( <Text key={ 1 } >{ card.resposta }</Text> ),
+						( <Text key={ 1 } >{ card.answer }</Text> ),
 						( next )
 					]: (
 						<Button title='Mostrar Resposta' onPress={ () => this.setState( { answer: true } ) } />

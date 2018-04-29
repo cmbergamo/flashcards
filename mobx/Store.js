@@ -1,22 +1,20 @@
 
 import { observable, computed, decorate, action } from "mobx";
+import { load } from '../api/Storage';
 
 class Store {
-	
-	decks = [
-		{ id: '201804391' , title: 'T1', cards: [
-			{ id: '20180439c1', pergunta: 'p1', resposta: 'r1' }, { id: '20180439c2', pergunta: 'p2', resposta: 'r2' }
-		] },
-		{ id: '201804392' , title: 'T2', cards: [
-			{ id: '20180439c3', pergunta: 'p3', resposta: 'r3' }, { id: '20180439c4', pergunta: 'p4', resposta: 'r4' }
-		]}
-	];
-	temp = { title: '', cards: [] };
 
-	/* constructor() {
-		this.decks = [];
-		this.temp = { title: '', cards: [] };
-	} */
+	constructor( ) {
+		load( ).then( res => {
+			if ( res )
+				this.initialLoad( res );
+			else
+				this.initialLoad( [] );
+		} );
+	}
+	
+	decks = [ ];
+	temp = { title: '', cards: [ ] };
 
 	get listDecks() {
 		return this.decks;
@@ -31,7 +29,7 @@ class Store {
 	}
 
 	createCard( _card ) {
-		if ( _card.id ) {
+		if ( _card.id && _card.id > 0 ) {
 			const cards = this.temp.cards.filter( card => card.id !== _card.id )
 			cards.push( _card );
 
@@ -48,20 +46,26 @@ class Store {
 	}
 
 	createDeck( _deck ) {
-		if ( _deck.id ) {
-			const deck = this.decks.filter( d => d.id !== _deck.id );
-			deck.push( _deck );
+
+		if ( _deck.id && _deck.id > 0 ) {
+			const deck = this.decks.filter( d => d.id !== _deck.id ) || [] ;
+
+			this.temp.title = _deck.title;
+			this.temp.id = _deck.id;
+
+			deck.push( this.temp );
 
 			this.decks = deck;
+
 		} else {
 
-			_deck.id = Date.now();
-			
-			if ( this.decks )
-				this.decks.push( _deck );
-			else
-				this.decks = [ _deck ];
+			this.temp.title = _deck.title;
+			this.temp.id = Date.now();
+
+			this.decks.push( this.temp );
 		}
+
+		this.temp = { title: '', cards: [] };
 	}
 
 	removeCard( _id ) {
@@ -72,19 +76,10 @@ class Store {
 		this.temp.cards = newCards
 	}
 
-	/* @computed get totalCards() {
-		if ( this.temp.cards )
-			return 0;
-		else
-			return this.temp.cards.lenght;
-	} */
+	initialLoad( _decks ) {
+		this.decks = _decks;
+	}
 
-	/* get title( _index ) {
-		if ( _index < 0 )
-			return this.temp.title;
-		else
-			return this.decks[ _index ].title;
-	} */
 }
 
 decorate( Store, {
@@ -94,20 +89,10 @@ decorate( Store, {
 	listDecks: computed,
 	onCreationCards: computed,
 	createCard: action,
-	removeCard: action
+	removeCard: action,
+	initialLoad: action
 } )
 
-/* Store.prototype.createCard = function( _deck ) {
-	this.temp = _deck;	
-}
-
-Store.prototype.createCard = function( _card ) {
-	console.log('criando cartão');
-	if ( this.temp.cards )
-		this.temp.cards.push( _card );
-	else
-		this.temp.cards = [ _card ];
-} */
 const store = new Store();
 
 export default store;
