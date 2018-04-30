@@ -5,7 +5,8 @@ import { inject, observer } from 'mobx-react';
 class Card extends Component {
 
 	state = {
-		answer: false
+		answer: false,
+		disabled: false
 	}
 
 	answer( _type ) {
@@ -13,6 +14,8 @@ class Card extends Component {
 			this.props.store.correctAnswer();
 		else
 			this.props.store.wrongAnswer();
+
+		this.setState( { desabled: true } );
 	}
 
 	render() {
@@ -20,17 +23,20 @@ class Card extends Component {
 		const card = cards[ pos ];
 
 		let components = [];
+
+		const total = cards.length;
+		const atual = pos + 1;
 		
 		if ( this.state.answer ) {
 
 			components.push( <Text key={ 1 } >{ card.answer }</Text> );
-			components.push( <Button key={ 2 } title='Correto' onPress={ () => this.answer( 1 ) } /> );
-			components.push( <Button key={ 3 } title='Errado' onPress={ () =>  this.answer( -1 ) } /> );
+			components.push( <Button key={ 2 } title='Correto' disabled={ this.state.disabled } onPress={ () => this.answer( 1 ) } /> );
+			components.push( <Button key={ 3 } title='Errado' disabled={ this.state.disabled } onPress={ () =>  this.answer( -1 ) } /> );
 
-			if ( cards.length > pos + 1 ) {
-				components.push( <Button key={ 4 } title='Próxima' onPress={ () => this.props.navigation.navigate( 'Card', { cards, pos: pos+1 } ) } /> );
+			if ( total > atual ) {
+				components.push( <Button key={ 4 } title='Próxima' disabled={ !this.state.disabled } onPress={ () => this.props.navigation.navigate( 'Card', { cards, pos: pos+1 } ) } /> );
 			} else {
-				components.push( <Button key={ 5 } title='Escolher outro Deck' onPress={ () => this.props.navigation.navigate( 'List' ) } /> );
+				components.push( <Button key={ 5 } title='Escolher outro Deck' disabled={ !this.state.disabled } onPress={ () => this.props.navigation.navigate( 'List' ) } /> );
 			}
 
 		} else {
@@ -41,6 +47,7 @@ class Card extends Component {
 			<View>
 				<Text>{ card.question }</Text>
 				{ components.map( c => c ) }
+				<Text>Cartão { atual } de { total }</Text>
 			</View>
 		);
 	}

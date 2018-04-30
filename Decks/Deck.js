@@ -8,8 +8,8 @@ const Deck = ( props ) => {
 	const deck = decks[ props.navigation.state.params.ordem ];
 	return (
 		<View>
-			<Text>{ deck.title }</Text>
-			<Text>{ deck.cards.length }</Text>
+			<Text>Título: { deck.title }</Text>
+			<Text>Total de cartões neste baralho: { deck.cards.length }</Text>
 			<Button title='Iniciar' onPress={ () => props.navigation.navigate( 'Card', { cards: deck.cards, pos: 0 } ) } />
 		</View>
 	);
