@@ -15,6 +15,7 @@ class Store {
 	
 	decks = [ ];
 	temp = { title: '', cards: [ ] };
+	statistics = { correct: 0, wrong: 0 };
 
 	get listDecks() {
 		return this.decks;
@@ -26,6 +27,10 @@ class Store {
 
 	get onCreationCards() {
 		return this.temp.cards;
+	}
+
+	get statisticsTotal() {
+		return this.statistics;
 	}
 
 	createCard( _card ) {
@@ -80,6 +85,14 @@ class Store {
 		this.decks = _decks;
 	}
 
+	correctAnswer() {
+		this.statistics.correct = this.statistics.correct + 1;
+	}
+
+	wrongAnswer() {
+		this.statistics.wrong = this.statistics.wrong + 1;
+	}
+
 }
 
 decorate( Store, {
@@ -90,7 +103,9 @@ decorate( Store, {
 	onCreationCards: computed,
 	createCard: action,
 	removeCard: action,
-	initialLoad: action
+	initialLoad: action,
+	correctAnswer: action,
+	wrongAnswer: action
 } )
 
 const store = new Store();
