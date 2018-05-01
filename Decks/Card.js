@@ -15,7 +15,7 @@ class Card extends Component {
 		else
 			this.props.store.wrongAnswer();
 
-		this.setState( { desabled: true } );
+		this.setState( { disabled: true } );
 	}
 
 	render() {
@@ -36,7 +36,7 @@ class Card extends Component {
 			if ( total > atual ) {
 				components.push( <Button key={ 4 } title='Próxima' disabled={ !this.state.disabled } onPress={ () => this.props.navigation.navigate( 'Card', { cards, pos: pos+1 } ) } /> );
 			} else {
-				components.push( <Button key={ 5 } title='Escolher outro Deck' disabled={ !this.state.disabled } onPress={ () => this.props.navigation.navigate( 'List' ) } /> );
+				components.push( <Button key={ 5 } title='Estatisticas' disabled={ !this.state.disabled } onPress={ () => this.props.navigation.navigate( 'Stats' ) } /> );
 			}
 
 		} else {

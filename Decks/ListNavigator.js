@@ -2,6 +2,7 @@ import React from 'react';
 import { StackNavigator } from 'react-navigation';
 import Deck from './Deck';
 import Card from './Card';
+import Stats from './Stats';
 import ListDecks from './ListDecks';
 
 const ListNavigator = StackNavigator( {
@@ -13,6 +14,9 @@ const ListNavigator = StackNavigator( {
 	},
 	Card: {
 		screen: Card
+	},
+	Stats: {
+		screen: Stats
 	}
 },
 {
