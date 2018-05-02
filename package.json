@@ -27,7 +27,7 @@
     "mobx-react": "^5.0.0",
     "react": "16.3.2",
     "react-native": "^0.54.2",
-    "react-navigation": "^1.5.11",
+    "react-navigation": "^1.5.10",
     "socks": "2.2.0"
   }
 }

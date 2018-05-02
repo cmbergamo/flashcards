@@ -16,9 +16,9 @@ const ListDecks = ( props ) => {
 		<View style={ style.view } >
 			<SideMenu navigation={ props.navigation } />
 			<View style={ style.container } >
-				{ store.listDecks.map( ( deck, ordem ) => {
+				{ store.listDecks.map( ( deck ) => {
 						return (
-							<TouchableOpacity key={ deck.id } style={ style.deck } onPress={ () => props.navigation.navigate( 'Deck', { ordem } ) } >
+							<TouchableOpacity key={ deck.id } style={ style.deck } onPress={ () => props.navigation.navigate( 'Deck', { deck } ) } >
 								<Text>{ deck.title }</Text>
 								<Text>Cartões: { deck.cards.length }</Text>
 							</TouchableOpacity>

@@ -7,14 +7,9 @@ import { submityDeck } from '../api/Storage';
 
 class CreateDeck extends Component {
 	
-	state = {
-		title: '',
-		id: 0,
-	}
-
 	saveDeck( ) {
 		
-		this.props.store.createDeck( this.state );
+		this.props.store.createDeck( );
 
 		submityDeck( this.props.store.listDecks );
 
@@ -30,21 +25,9 @@ class CreateDeck extends Component {
 		}) */
 	}
 
- 	// static getDerivedStateFromProps( nextProps, prevState ) {
-	componentWillReceiveProps( nextProps ) {
-
-		if ( nextProps.navigation && nextProps.navigation.state && nextProps.navigation.state.params && nextProps.navigation.state.params.deck ) {
-			 const { deck } = nextProps.navigation.state.params;
-
-			return { title: deck.title, cards: deck.cards, id: deck.id };
-		
-		}
-
-		//return null;
-	}
-
 	render( ) {
-	
+		const { store } = this.props;
+
 		return (
 			<View style={ styles.body } >
 				<SideMenu navigation={ this.props.navigation } />
@@ -52,7 +35,7 @@ class CreateDeck extends Component {
 					<Text style={ styles.label } >Título:</Text>
 					<TextInput style={ styles.input }
 						underlineColorAndroid='skyblue'
-						onChangeText={ ( title ) => this.setState( { title } ) } value={ this.state.title }/>
+						onChangeText={ ( title ) => store.editTitle( title ) } value={ store.editedTitle }/>
 				</View>
 				<View style={ styles.field } >
 					<Text style={ styles.label } >Total Cards: { this.props.store.totalCards }</Text>

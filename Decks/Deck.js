@@ -1,18 +1,35 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button, TouchableOpacity, StyleSheet } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
 import { inject, observer } from 'mobx-react';
 
 const Deck = ( props ) => {
 	const { store } = props;
-	const decks = store.listDecks;
-	const deck = decks[ props.navigation.state.params.ordem ];
+	const { deck } = props.navigation.state.params;
+
 	return (
 		<View>
 			<Text>Título: { deck.title }</Text>
 			<Text>Total de cartões neste baralho: { deck.cards.length }</Text>
-			<Button title='Iniciar' onPress={ () => props.navigation.navigate( 'Card', { cards: deck.cards, pos: 0 } ) } />
+			<View style={ styles.opcoes } >
+				<Button title='Iniciar' onPress={ () => props.navigation.navigate( 'Card', { cards: deck.cards, pos: 0 } ) } />
+				<TouchableOpacity onPress={ () => edit( props.store, deck, props.navigation ) } >
+					<MaterialIcons name="edit" size={20} color="green" />
+				</TouchableOpacity>
+			</View>
 		</View>
 	);
 }
+
+const edit = ( _store, _deck, _navigation ) => {
+	_store.editDeck( _deck );
+	_navigation.navigate( 'Create' )
+}
+
+const styles = StyleSheet.create( {
+	opcoes: {
+		flexDirection: 'row'
+	}
+} );
 
 export default inject( 'store' )( observer( Deck ) );

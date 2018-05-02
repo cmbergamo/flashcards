@@ -14,7 +14,7 @@ class Store {
 	}
 	
 	decks = [ ];
-	temp = { title: '', cards: [ ] };
+	temp = { title: '', cards: [ ], id: 0 };
 	statistics = { correct: 0, wrong: 0 };
 
 	get listDecks() {
@@ -31,6 +31,14 @@ class Store {
 
 	get statisticsTotal() {
 		return this.statistics;
+	}
+
+	get editedDeck() {
+		return this.temp;
+	}
+
+	get editedTitle() {
+		return this.temp.title;
 	}
 
 	createCard( _card ) {
@@ -50,13 +58,10 @@ class Store {
 		}
 	}
 
-	createDeck( _deck ) {
-
-		if ( _deck.id && _deck.id > 0 ) {
-			const deck = this.decks.filter( d => d.id !== _deck.id ) || [] ;
-
-			this.temp.title = _deck.title;
-			this.temp.id = _deck.id;
+	createDeck( ) {
+		this.temp
+		if ( this.temp.id && this.temp.id > 0 ) {
+			const deck = this.decks.filter( d => d.id !== this.temp.id ) || [] ;
 
 			deck.push( this.temp );
 
@@ -64,13 +69,12 @@ class Store {
 
 		} else {
 
-			this.temp.title = _deck.title;
 			this.temp.id = Date.now();
 
 			this.decks.push( this.temp );
 		}
 
-		this.temp = { title: '', cards: [] };
+		this.temp = { title: '', cards: [], id: 0 };
 	}
 
 	removeCard( _id ) {
@@ -93,19 +97,36 @@ class Store {
 		this.statistics.wrong = this.statistics.wrong + 1;
 	}
 
+	resetStats() {
+		this.statistics = { correct: 0, wrong: 0 };
+	}
+
+	editDeck( _deck ) {
+		this.temp = _deck;
+	}
+
+	editTitle( _title ) {
+		this.temp.title = _title;
+	}
 }
 
 decorate( Store, {
 	decks: observable,
 	temp: observable,
+	statistics: observable,
 	totalCards: computed,
 	listDecks: computed,
 	onCreationCards: computed,
+	editedDeck: computed,
+	editedTitle: computed,
 	createCard: action,
 	removeCard: action,
 	initialLoad: action,
 	correctAnswer: action,
-	wrongAnswer: action
+	wrongAnswer: action,
+	editDeck: action,
+	editTitle: action,
+	resetStats, action
 } )
 
 const store = new Store();
