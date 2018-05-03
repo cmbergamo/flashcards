@@ -19,6 +19,7 @@ import CreateDeck from './Decks/CreateDeck';
 import SideMenu from './Components/SideMenu';
 import ListDecks from './Decks/ListDecks';
 import ListNavigator from './Decks/ListNavigator';
+import Config  from './Components/Config';
 import { StackNavigator, DrawerNavigator } from 'react-navigation';
 import { Provider, inject, observer } from 'mobx-react';
 import store from './mobx/Store';
@@ -67,6 +68,12 @@ const Drawer = DrawerNavigator ( {
 		screen: StackCreate,
 		navigationOptions: {
 			drawerLabel: 'Criar Deck'
+		}
+	},
+	Config: {
+		screen: Config,
+		navigationOptions: {
+			drawerLabel: 'Config'
 		}
 	}
 

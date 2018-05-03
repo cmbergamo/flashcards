@@ -126,7 +126,7 @@ decorate( Store, {
 	wrongAnswer: action,
 	editDeck: action,
 	editTitle: action,
-	resetStats, action
+	resetStats: action
 } )
 
 const store = new Store();
