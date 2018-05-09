@@ -4,7 +4,8 @@ import {
 	StyleSheet,
 	Text,
 	View,
-	TouchableOpacity
+	TouchableOpacity,
+	StatusBar
 } from 'react-native';
 import SideMenu from '../Components/SideMenu';
 import { inject, observer } from 'mobx-react';
@@ -14,6 +15,10 @@ const ListDecks = ( props ) => {
 
 	return (
 		<View style={ style.view } >
+			<StatusBar
+					backgroundColor="black"
+					barStyle="light-content"
+				/>
 			<SideMenu navigation={ props.navigation } />
 			<View style={ style.container } >
 				{ store.listDecks.map( ( deck ) => {
