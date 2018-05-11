@@ -1,6 +1,8 @@
 import { AsyncStorage } from 'react-native';
+import { Notifications, Permissions } from 'expo';
 
-const FLASHCARDS_STORAGE_KEY = 'CMB-Udacity'
+const FLASHCARDS_STORAGE_KEY = 'CMB-Udacity';
+const NOTIFICATION_KEY = 'CMB-Flashcards';
 
 export function submityDeck( deck ) {
 	return AsyncStorage.mergeItem( FLASHCARDS_STORAGE_KEY, JSON.stringify( deck ) );
@@ -13,6 +15,58 @@ export function load( ) {
 
 			return decks;
 		} );
+}
+
+export function clearLocalNotifications() {
+	return AsyncStorage.removeItem( NOTIFICATION_KEY )
+		.then( Notifications.cancelAllScheduledNotificationsAsync() );
+}
+
+export function setLocalNotifications( _hour, _minute ) {
+	AsyncStorage.getItem( NOTIFICATION_KEY )
+		.then( JSON.parse )
+		.then( data => {
+			if ( data === null ) {
+				Permissions.askAsync( Permissions.NOTIFICATIONS )
+					.then( ( { status } ) => {
+						
+						if ( status === 'granted' ) {
+							Notifications.cancelAllScheduledNotificationsAsync();
+
+							let tomorrow = new Date();
+							tomorrow.setDate( tomorrow.getDate() + 1 );
+							tomorrow.setHours( _hour );
+							tomorrow.setMinutes( _minute );
+
+							Notifications.scheduleLocalNotificationAsync(
+								createNotifications(),
+								{
+									time: tomorrow,
+									repeat: 'day'
+								}
+							).then( () => AsyncStorage.setItem( NOTIFICATION_KEY, JSON.stringify( { able: true, hour: _hour, minute: _minute } ) ) );
+						}
+					});
+			}
+		});
+}
+
+export function hasNotification() {
+	return AsyncStorage.getItem( NOTIFICATION_KEY )
+		.then( JSON.parse );
+}
+
+function createNotifications( ) {
+	return {
+		title: 'Hora do estudo!',
+		body: 'Você ainda não estou',
+		android: {
+			sound: true,
+			vibrate: true,
+			priority: 'high',
+			sticky: false
+		}
+	}
 }
 
 /* export function removeDeck ( deck ) {

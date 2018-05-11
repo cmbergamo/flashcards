@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Switch, StatusBar, TimePickerAndroid } from 'react-native';
-import { Notifications, Permissions } from 'expo';
 import SideMenu from './SideMenu';
+import { clearLocalNotifications, setLocalNotifications, hasNotification } from '../api/Storage';
 
 class Config extends Component {
 	state = {
@@ -10,7 +10,9 @@ class Config extends Component {
 		minute: -1
 	}
 
-	NOTIFICATION_KEY = 'CMB-Flashcards';
+	UNSAFE_componentWillMount() {
+		hasNotification().then( result => this.setState( result ) );
+	}
 
 	showTimerPicker(){
 		
@@ -18,54 +20,10 @@ class Config extends Component {
 			.then( result =>  {
 				if( result.action === 'timeSetAction' )
 					this.setState ( { hour: result.hour, minute: result.minute } );
+					
+					setLocalNotifications( result.hour, result.minute );
 				}
 			);
-	}
-
-	clearLocalNotifications() {
-		return AsyncStorage.removeItem( this.NOTIFICATION_KEY )
-			.then( Notifications.cancelAllScheduledNotificationsAsync() );
-	}
-
-	createNotifications() {
-		return {
-			title: 'Hora do estudo!',
-			body: 'Você ainda não estou',
-			android: {
-				sound: true,
-				vibrate: true,
-				priority: 'high',
-				sticky: false
-			}
-		}
-	}
-
-	setLocalNotifications() {
-		AsyncStorage.getItem( this.NOTIFICATION_KEY )
-			.then( JSON.parse )
-			.then( data => {
-				if ( data === null ) {
-					Permissions.askAsync( Permissions.NOTIFICATIONS )
-						.then( status => {
-							if ( status === 'granted' ) {
-								Notifications.cancelAllScheduledNotificationsAsync();
-
-								let tomorrow = new Date();
-								tomorrow.setDate( tomorrow.getDate() + 1 );
-								tomorrow.setHours( this.state.hour );
-								tomorrow.setMinutes( this.state.minute );
-
-								Notifications.scheduleLocalNotificationAsync(
-									this.createNotifications(),
-									{
-										time: tomorrow,
-										repeat: 'day'
-									}
-								).then( () => AsyncStorage.setItem( this.NOTIFICATION_KEY, JSON.stringify( true ) ) );
-							}
-						})
-				}
-			})
 	}
 
 	render () {

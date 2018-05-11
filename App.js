@@ -23,7 +23,7 @@ import Config  from './Components/Config';
 import { StackNavigator, DrawerNavigator } from 'react-navigation';
 import { Provider, inject, observer } from 'mobx-react';
 import store from './mobx/Store';
-import { load } from './api/Storage';
+import { load, clearLocalNotifications, setLocalNotifications, hasNotification } from './api/Storage';
 
 const instructions = Platform.select({
 	ios: 'Press Cmd+R to reload,\n' +
@@ -33,6 +33,16 @@ const instructions = Platform.select({
 
 type Props = {};
 class App extends Component<Props> {
+
+	UNSAFE_componentWillMount() {
+		hasNotification().then( result => {
+			if ( result !== null ) {
+				clearLocalNotifications();
+
+				setLocalNotifications( result.hour, result.minute );
+			}
+		} );
+	}
 
 	render() {
 		return (
