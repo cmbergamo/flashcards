@@ -26,7 +26,17 @@ Upgrading to a new version of React Native requires updating the `react-native`,
 
 If Yarn was installed when the project was initialized, then dependencies will have been installed via Yarn, and you should probably use it to run these commands as well. Unlike dependency installation, command running syntax is identical for Yarn and NPM at the time of this writing.
 
+### `yarn install`
+
+You will need to install de dependencies with the command:
+
+```
+yarn install
+```
+
 ### `yarn start`
+
+Para rodar o projeto em modo de desenvolvimento execute o comando:
 
 Runs your app in development mode.
 
