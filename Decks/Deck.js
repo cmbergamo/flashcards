@@ -12,10 +12,21 @@ const Deck = ( props ) => {
 			<Text>Título: { deck.title }</Text>
 			<Text>Total de cartões neste baralho: { deck.cards.length }</Text>
 			<View style={ styles.opcoes } >
-				<Button title='Iniciar' onPress={ () => props.navigation.navigate( 'Card', { cards: deck.cards, pos: 0 } ) } />
+				<Button title='Iniciar' 
+					disabled={ deck.cards.length > 0 }
+					onPress={ () => props.navigation.navigate( 'Card', { cards: deck.cards, pos: 0 } ) }
+				/>
+
 				<TouchableOpacity onPress={ () => edit( props.store, deck, props.navigation ) } >
+					<Text>Editar Baralho</Text>
 					<MaterialIcons name="edit" size={20} color="green" />
 				</TouchableOpacity>
+
+				<TouchableOpacity onPress={ () => createCard( props.store, deck, props.navigation ) } >
+					<MaterialIcons name="playlist_add" size={20} color="green" />
+					<Text>Adicionar Cartão</Text>
+				</TouchableOpacity>
+				
 			</View>
 		</View>
 	);
@@ -23,7 +34,12 @@ const Deck = ( props ) => {
 
 const edit = ( _store, _deck, _navigation ) => {
 	_store.editDeck( _deck );
-	_navigation.navigate( 'Create' )
+	_navigation.navigate( 'Create' );
+}
+
+const createCard = ( _store, _deck, _navigation ) => {
+	_store.editDeck( _deck );
+	_navigation.navigate( 'CCard' );
 }
 
 const styles = StyleSheet.create( {

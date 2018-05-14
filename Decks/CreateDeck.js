@@ -15,14 +15,6 @@ class CreateDeck extends Component {
 
 		this.props.navigation.navigate('Home');
 		
-		/* this.setState( () => {
-			const { cards } = this.state;
-			let array = cards.slice( 0 );
-			array = array.concat( [ cards.length ] )
-			alert( array );
-
-			return { cards: array };
-		}) */
 	}
 
 	render( ) {
@@ -58,16 +50,11 @@ class CreateDeck extends Component {
 					<Button title='Salvar' onPress={ () => this.saveDeck() } />
 				</View>
 
-				{/* <Animated.View style={ { height, bottom: 0, right: 0, left: 0, position: 'absolute' } }>
-					<CreateCard />
-				</Animated.View> */}
 			</View>
 		) ;
 	}
 
 }
-
-// const CCard =  Animated.createAnimatedComponent( CreateCard );
 
 const styles = StyleSheet.create( {
 	body: {

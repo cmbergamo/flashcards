@@ -13,9 +13,14 @@ class CreateCard extends Component {
 	salveCard( ) {
 		const { save, question, answer, id } = this.state;
 
-		this.props.store.createCard( this.state );
+		if ( this.state.question !== undefined && this.state.question !== null && this.state.question !== ''
+			&& this.state.answer !== undefined && this.state.answer !== null && this.state.answer !== '') {
+				this.props.store.createCard( this.state );
 
-		this.props.navigation.pop();
+				this.props.navigation.pop();
+		} else {
+			alert('Não é permitido criar um cartão com uma pergunta/resposta vazia.');
+		}
 	}
 
 	static getDerivedStateFromProps(nextProps, prevState) {
