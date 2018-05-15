@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Button } from 'react-native';
 import { inject, observer } from 'mobx-react';
+import styles from '../Components/AppStyles';
 
 class Card extends Component {
 
@@ -44,7 +45,7 @@ class Card extends Component {
 		}
 
 		return (
-			<View>
+			<View style={ styles.container } >
 				<Text>{ card.question }</Text>
 				{ components.map( c => c ) }
 				<Text>Cartão { atual } de { total }</Text>

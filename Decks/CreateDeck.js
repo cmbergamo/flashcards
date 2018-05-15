@@ -3,15 +3,17 @@ import { View, Text, TextInput, StyleSheet, Button, Animated, TouchableOpacity }
 import { inject, observer } from 'mobx-react';
 import SideMenu from '../Components/SideMenu';
 import { MaterialIcons } from '@expo/vector-icons';
-import { submityDeck } from '../api/Storage';
+import { load, saveDecks } from '../api/Storage';
 
 class CreateDeck extends Component {
 	
 	saveDeck( ) {
-		
 		this.props.store.createDeck( );
 
-		submityDeck( this.props.store.listDecks );
+		saveDecks( this.props.store.listDecks )
+			.then( () => {
+				load().then( result => console.log( "Load", result ) );
+			} );
 
 		this.props.navigation.navigate('Home');
 		

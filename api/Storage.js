@@ -4,8 +4,11 @@ import { Notifications, Permissions } from 'expo';
 const FLASHCARDS_STORAGE_KEY = 'CMB-Udacity';
 const NOTIFICATION_KEY = 'CMB-Flashcards';
 
-export function submityDeck( deck ) {
-	return AsyncStorage.mergeItem( FLASHCARDS_STORAGE_KEY, JSON.stringify( deck ) );
+export function saveDecks( decks ) {
+	return AsyncStorage.removeItem( FLASHCARDS_STORAGE_KEY )
+		.then( () => {
+			return AsyncStorage.setItem( FLASHCARDS_STORAGE_KEY, JSON.stringify( decks ) );
+		})
 }
 
 export function load( ) {

@@ -25,12 +25,6 @@ import { Provider, inject, observer } from 'mobx-react';
 import store from './mobx/Store';
 import { load, clearLocalNotifications, setLocalNotifications, hasNotification } from './api/Storage';
 
-const instructions = Platform.select({
-	ios: 'Press Cmd+R to reload,\n' +
-		'Cmd+D or shake for dev menu',
-	android: ( <Card title='Android' /> ),
-});
-
 type Props = {};
 class App extends Component<Props> {
 
