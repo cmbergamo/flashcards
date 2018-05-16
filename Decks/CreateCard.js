@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, StyleSheet, Button } from 'react-native';
 import { inject, observer } from 'mobx-react';
+import styles from '../Components/AppStyles';
+import AppButton from '../Components/AppButton';
 
 class CreateCard extends Component {
 	
@@ -40,21 +42,21 @@ class CreateCard extends Component {
 		const { navigation } = this.props;
 
 		return (
-			<View style={ styles.body } >
-				<View style={ styles.field } >
+			<View style={ styles.container } >
+				<View style={ styles.options } >
 					<Text style={ styles.label } >Pergunta:</Text>
 					<TextInput style={ styles.input }
 						underlineColorAndroid='skyblue'
 						onChangeText={ ( question ) => this.setState( { question } ) } value={ this.state.question }/>
 				</View>
-				<View style={ styles.field } >
+				<View style={ styles.options } >
 					<Text style={ styles.label } >Resposta:</Text>
 					<TextInput style={ styles.input }
 						underlineColorAndroid='skyblue'
 						onChangeText={ ( answer ) => this.setState( { answer } ) } value={ this.state.answer }/>
 				</View>
-				<View style={ styles.fieldCentered } >
-					<Button title='Salvar' onPress={ () => this.salveCard( )  } />
+				<View style={ styles.options } >
+					<AppButton title='Salvar' onPress={ () => this.salveCard( )  } />
 				</View>
 			</View>
 		) ;
@@ -62,7 +64,7 @@ class CreateCard extends Component {
 
 }
 
-const styles = StyleSheet.create( {
+/* const styles = StyleSheet.create( {
 	body: {
 		flex: 1,
 		alignItems: 'flex-start',
@@ -97,6 +99,6 @@ const styles = StyleSheet.create( {
 		padding: 0,
 		height: 33
 	}
-} )
+} ) */
 
 export default inject( "store" )( observer( CreateCard ) );

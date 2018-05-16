@@ -4,6 +4,7 @@ import { inject, observer } from 'mobx-react';
 import SideMenu from '../Components/SideMenu';
 import { MaterialIcons } from '@expo/vector-icons';
 import { load, saveDecks } from '../api/Storage';
+import AppButton from '../Components/AppButton';
 
 class CreateDeck extends Component {
 	
@@ -33,23 +34,19 @@ class CreateDeck extends Component {
 				</View>
 				<View style={ styles.field } >
 					<Text style={ styles.label } >Total Cards: { this.props.store.totalCards }</Text>
-					<Button title='Adic. Cartão' onPress={ () => this.props.navigation.navigate( 'CCard' ) } />
+					<AppButton title='Adic. Cartão' onPress={ () => this.props.navigation.navigate( 'CCard' ) } />
 				</View>
 				<View>
 					{ this.props.store.onCreationCards.map( ( card, ordem ) => {
 						return ( <View key={ ordem } style={ styles.listCards } >
 							<Text>{ card.question }</Text>
-							<TouchableOpacity onPress={ () => this.props.navigation.navigate( "CCard",  { card } ) } >
-								<MaterialIcons name="edit" size={20} color="green" />
-							</TouchableOpacity>
-							<TouchableOpacity onPress={ () => this.props.store.removeCard( card.id ) } >
-								<MaterialIcons name="delete" size={20} color="green" />
-							</TouchableOpacity>
+							<AppButton style={ { flex: 0 } } press={ () => this.props.navigation.navigate( "CCard",  { card } ) } icon="edit" />
+							<AppButton style={ { flex: 0 } } press={ () => this.props.store.removeCard( card.id ) } icon="delete" />
 						</View> );
 					} )}
 				</View>
 				<View style={ styles.fieldCentered } >
-					<Button title='Salvar' onPress={ () => this.saveDeck() } />
+					<AppButton title='Salvar' onPress={ () => this.saveDeck() } />
 				</View>
 
 			</View>
@@ -71,7 +68,7 @@ const styles = StyleSheet.create( {
 		alignItems: 'flex-start',
 		justifyContent: 'flex-start',
 		padding: 5,
-		backgroundColor: 'white'
+		width: 120
 	},
 	field: {
 		flex: 1,

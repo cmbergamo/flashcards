@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, Button } from 'react-native';
 import { inject, observer } from 'mobx-react';
+import AppButton from '../Components/AppButton';
 
 const Stats = ( props ) => {
 	const { correct, wrong } = props.store.statisticsTotal;
@@ -13,9 +14,9 @@ const Stats = ( props ) => {
 			<Text>Questões corretas: { correct }</Text>
 			<Text>Questões incorretas: { wrong }</Text>
 			<View style={ { flexDirection: 'row' } } >
-				<Button title='Escolher outro Baralho' onPress={ () => end( props.store, props.navigation ) } />
-				<Button title='Reiniciar Quiz' onPress={ () => fim( props.store, props.navigation ) } />
-				<Button title='Voltar para o Baralho' onPress={ () => fim( props.store, props.navigation ) } />
+				<AppButton title='Escolher outro Baralho' onPress={ () => end( props.store, props.navigation ) } />
+				<AppButton title='Reiniciar Quiz' onPress={ () => fim( props.store, props.navigation ) } />
+				<AppButton title='Voltar para o Baralho' onPress={ () => fim( props.store, props.navigation ) } />
 			</View>
 		</View>
 	)

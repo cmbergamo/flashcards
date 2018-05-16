@@ -10,13 +10,22 @@ const ListNavigator = StackNavigator( {
 		screen: ListDecks
 	},
 	Deck: {
-		screen: Deck
+		screen: Deck,
+		navigationOptions: ( { navigation } ) => ({
+			title: "Baralho",
+		} )
 	},
 	Card: {
-		screen: Card
+		screen: Card,
+		navigationOptions: ( { navigation } ) => ( {
+			title: "Cartão",
+		} )
 	},
 	Stats: {
-		screen: Stats
+		screen: Stats,
+		navigationOptions: ( { navigation } ) => ( {
+			title: "Estatísticas",
+		} )
 	}
 },
 {
