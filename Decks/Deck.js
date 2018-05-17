@@ -7,7 +7,7 @@ import AppButton from '../Components/AppButton';
 
 const Deck = ( props ) => {
 	const { store } = props;
-	const { deck } = props.navigation.state.params;
+	const deck = store.editedDeck;
 
 	return (
 		<View style={ styles.container } >
@@ -16,30 +16,28 @@ const Deck = ( props ) => {
 			<View style={ styles.options } >
 				<AppButton
 					disabled={ deck.cards.length <= 0 }
-					press={ () => props.navigation.navigate( 'Card', { cards: deck.cards, pos: 0 } ) }
+					press={ () => props.navigation.navigate( 'Card', { pos: 0 } ) }
 					title='Iniciar' />
 
 				<AppButton 
 					title='Editar Baralho'
-					press={ () => edit( props.store, deck, props.navigation ) }
+					press={ () => edit( props.store, props.navigation ) }
 					icon='edit' />
 
 				<AppButton
 					title='Ad. Cartão'
-					press={ () => createCard( props.store, deck, props.navigation ) }
+					press={ () => createCard( props.store, props.navigation ) }
 					icon='playlist-add' />
 			</View>
 		</View>
 	);
 }
 
-const edit = ( _store, _deck, _navigation ) => {
-	_store.editDeck( _deck );
+const edit = ( _store, _navigation ) => {
 	_navigation.navigate( 'Create' );
 }
 
-const createCard = ( _store, _deck, _navigation ) => {
-	_store.editDeck( _deck );
+const createCard = ( _store, _navigation ) => {
 	_navigation.navigate( 'CCard' );
 }
 

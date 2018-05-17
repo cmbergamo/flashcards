@@ -74,7 +74,6 @@ class Store {
 			this.decks.push( this.temp );
 		}
 
-		this.temp = { title: '', cards: [], id: 0 };
 	}
 
 	removeCard( _id ) {

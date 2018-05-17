@@ -34,7 +34,10 @@ class CreateDeck extends Component {
 				</View>
 				<View style={ styles.field } >
 					<Text style={ styles.label } >Total Cards: { this.props.store.totalCards }</Text>
-					<AppButton title='Adic. Cartão' onPress={ () => this.props.navigation.navigate( 'CCard' ) } />
+					<AppButton title='Adic. Cartão' press={ () => {
+							console.log('chamou');
+							this.props.navigation.navigate( 'CCard' ) } }
+						/>
 				</View>
 				<View>
 					{ this.props.store.onCreationCards.map( ( card, ordem ) => {
@@ -46,7 +49,7 @@ class CreateDeck extends Component {
 					} )}
 				</View>
 				<View style={ styles.fieldCentered } >
-					<AppButton title='Salvar' onPress={ () => this.saveDeck() } />
+					<AppButton title='Salvar' press={ () => this.saveDeck() } />
 				</View>
 
 			</View>

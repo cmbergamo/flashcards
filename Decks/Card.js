@@ -21,7 +21,9 @@ class Card extends Component {
 	}
 
 	render() {
-		const { cards, pos } = this.props.navigation.state.params;
+		const { pos } = this.props.navigation.state.params;
+		const deck = this.props.store.editedDeck;
+		const { cards } = deck;
 		const card = cards[ pos ];
 
 		let components = [];
@@ -48,11 +50,23 @@ class Card extends Component {
 							</View>
 						) : (
 							total > atual ?
-								( <AppButton title='Próxima' press={ () => this.props.navigation.navigate( 'Card', { cards, pos: pos+1 } ) } /> ) :
-								( <AppButton title='Estatisticas' press={ () => this.props.navigation.navigate( 'Stats' ) } /> )
+								(
+									<View style={ styles.options } >
+										<AppButton title='Próxima' press={ () => this.props.navigation.navigate( 'Card', { pos: pos+1 } ) } />
+									</View>
+								) :
+								(
+									<View style={ styles.options } >
+										<AppButton title='Estatisticas' press={ () => this.props.navigation.navigate( 'Stats' ) } />
+									</View>
+								)
 						)
 					) :
-					( <AppButton title='Mostrar Resposta' press={ () => this.setState( { answer: true } ) } /> )
+					(
+						<View style={ { flexDirection: 'row' } } >
+							<AppButton title='Mostrar Resposta' press={ () => this.setState( { answer: true } ) } />
+						</View>
+					)
 				}
 				<Text>Cartão { atual } de { total }</Text>
 			</View>

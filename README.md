@@ -1,44 +1,29 @@
-This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
-
-Below you'll find information about performing common tasks. The most recent version of this guide is available [here](https://github.com/react-community/create-react-native-app/blob/master/react-native-scripts/template/README.md).
-
 ## Table of Contents
 
-* [Updating to New Releases](#updating-to-new-releases)
-* [Available Scripts](#available-scripts)
-  * [yarn start](#npm-start)
-* [Environment Variables](#environment-variables)
+* [How to Install](#how-to-install)
+* [Starting project](#starting-project)
+* [Considerations](#environment-variables)
   * [Configuring Packager IP Address](#configuring-packager-ip-address)
 * [Troubleshooting](#troubleshooting)
   * [Networking](#networking)
   * [iOS Simulator won't open](#ios-simulator-wont-open)
   * [QR Code does not scan](#qr-code-does-not-scan)
 
-## Updating to New Releases
+## How to Install
 
-You should only need to update the global installation of `create-react-native-app` very rarely, ideally never.
-
-Updating the `react-native-scripts` dependency of your app should be as simple as bumping the version number in `package.json` and reinstalling your project's dependencies.
-
-Upgrading to a new version of React Native requires updating the `react-native`, `react`, and `expo` package versions, and setting the correct `sdkVersion` in `app.json`. See the [versioning guide](https://github.com/react-community/create-react-native-app/blob/master/VERSIONS.md) for up-to-date information about package version compatibility.
-
-## Available Scripts
-
-If Yarn was installed when the project was initialized, then dependencies will have been installed via Yarn, and you should probably use it to run these commands as well. Unlike dependency installation, command running syntax is identical for Yarn and NPM at the time of this writing.
-
-### `yarn install`
-
-You will need to install de dependencies with the command:
+To execute this project is recommended the use of Yarn. After yarn is installed, use yarn to get dependecies.
 
 ```
 yarn install
 ```
 
-### `yarn start`
-
-Para rodar o projeto em modo de desenvolvimento execute o comando:
+## Starting project
 
 Runs your app in development mode.
+
+```
+yarn start
+```
 
 Open it in the [Expo app](https://expo.io) on your phone to view it. It will reload if you save edits to your files, and you will see build errors and logs in the terminal.
 

@@ -56,7 +56,7 @@ class CreateCard extends Component {
 						onChangeText={ ( answer ) => this.setState( { answer } ) } value={ this.state.answer }/>
 				</View>
 				<View style={ styles.options } >
-					<AppButton title='Salvar' onPress={ () => this.salveCard( )  } />
+					<AppButton title='Salvar' press={ () => this.salveCard( )  } />
 				</View>
 			</View>
 		) ;
