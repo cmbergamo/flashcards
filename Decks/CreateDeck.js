@@ -11,10 +11,7 @@ class CreateDeck extends Component {
 	saveDeck( ) {
 		this.props.store.createDeck( );
 
-		saveDecks( this.props.store.listDecks )
-			.then( () => {
-				load().then( result => console.log( "Load", result ) );
-			} );
+		saveDecks( this.props.store.listDecks );
 
 		this.props.navigation.navigate('Home');
 		
@@ -35,7 +32,6 @@ class CreateDeck extends Component {
 				<View style={ styles.field } >
 					<Text style={ styles.label } >Total Cards: { this.props.store.totalCards }</Text>
 					<AppButton title='Adic. Cartão' press={ () => {
-							console.log('chamou');
 							this.props.navigation.navigate( 'CCard' ) } }
 						/>
 				</View>
