@@ -42,7 +42,7 @@ class App extends Component<Props> {
 		return (
 			<Provider store={ store }>
 					{/* <Stack style={ styles.container } /> */}
-				<Drawer style={ { flex: 1 } } />
+				<Drawer style={ { flex: 1 } } initial={ true } />
 			</Provider>
 		);
 	}

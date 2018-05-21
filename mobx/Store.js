@@ -107,6 +107,10 @@ class Store {
 	editTitle( _title ) {
 		this.temp.title = _title;
 	}
+
+	newDeck() {
+		this.temp = { title: '', cards: [ ], id: 0 };
+	}
 }
 
 decorate( Store, {
@@ -125,7 +129,8 @@ decorate( Store, {
 	wrongAnswer: action,
 	editDeck: action,
 	editTitle: action,
-	resetStats: action
+	resetStats: action,
+	newDeck: action
 } )
 
 const store = new Store();

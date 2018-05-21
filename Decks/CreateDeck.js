@@ -18,7 +18,10 @@ class CreateDeck extends Component {
 	}
 
 	render( ) {
-		const { store } = this.props;
+		const { store, initial } = this.props;
+
+		if ( initial )
+			store.newDeck();
 
 		return (
 			<View style={ styles.body } >
