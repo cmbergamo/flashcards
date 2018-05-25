@@ -3,12 +3,21 @@ import { View, Text, Button } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import AppButton from '../Components/AppButton';
 import styles from '../Components/AppStyles';
-import { clearLocalNotifications } from '../api/Storage'
+import { setLocalNotifications, hasNotification } from '../api/Storage'
 
 const Stats = ( props ) => {
 
-	clearLocalNotifications().then(
-		
+	hasNotification().then(
+		( info ) => {
+			
+			if( info !== null ) {
+				const { able, hour, minute } = info;
+
+				if ( able ) {
+					setLocalNotifications( hour, minute );
+				}
+			}
+		}
 	)
 
 	const { correct, wrong } = props.store.statisticsTotal;
