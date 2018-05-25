@@ -3,8 +3,14 @@ import { View, Text, Button } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import AppButton from '../Components/AppButton';
 import styles from '../Components/AppStyles';
+import { clearLocalNotifications } from '../api/Storage'
 
 const Stats = ( props ) => {
+
+	clearLocalNotifications().then(
+		
+	)
+
 	const { correct, wrong } = props.store.statisticsTotal;
 
 	const percent = correct * 100 / ( correct + wrong );

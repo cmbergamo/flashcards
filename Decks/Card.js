@@ -8,7 +8,9 @@ class Card extends Component {
 
 	state = {
 		answer: false,
-		disabled: false
+		disabled: false,
+		pos: 0,
+		cards: []
 	}
 
 	answer( _type ) {
@@ -20,16 +22,25 @@ class Card extends Component {
 		this.setState( { disabled: true } );
 	}
 
-	render() {
-		const { pos } = this.props.navigation.state.params;
-		const deck = this.props.store.editedDeck;
+	static getDerivedStateFromProps(nextProps, prevState) {
+		const { pos } = nextProps.navigation.state.params;
+
+		const deck = nextProps.store.editedDeck;
 		const { cards } = deck;
-		const card = cards[ pos ];
+		
+		if ( prevState.pos !== pos || cards !== prevState.cards )
+			return { pos, cards };
+
+		return null;
+	}
+
+	render() {
+		const card = this.state.cards[ this.state.pos ];
 
 		let components = [];
 
-		const total = cards.length;
-		const atual = pos + 1;
+		const total = this.state.cards.length;
+		const atual = this.state.pos + 1;
 		
 		return (
 			<View style={ styles.container } >
@@ -52,7 +63,7 @@ class Card extends Component {
 							total > atual ?
 								(
 									<View style={ styles.options } >
-										<AppButton title='Próxima' press={ () => this.props.navigation.navigate( 'Card', { pos: pos+1 } ) } />
+										<AppButton title='Próxima' press={ () => this.setState( { pos: atual, answer: false, disabled: false } ) } />
 									</View>
 								) :
 								(

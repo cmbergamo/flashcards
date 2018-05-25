@@ -26,8 +26,7 @@ export function clearLocalNotifications() {
 }
 
 export function setLocalNotifications( _hour, _minute ) {
-	AsyncStorage.getItem( NOTIFICATION_KEY )
-		.then( JSON.parse )
+	hasNotification()
 		.then( data => {
 			if ( data === null ) {
 				Permissions.askAsync( Permissions.NOTIFICATIONS )

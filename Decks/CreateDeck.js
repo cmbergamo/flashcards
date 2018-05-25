@@ -13,15 +13,11 @@ class CreateDeck extends Component {
 
 		saveDecks( this.props.store.listDecks );
 
-		this.props.navigation.navigate('Home');
-		
+		this.props.navigation.navigate( 'Deck' );
 	}
 
 	render( ) {
 		const { store, initial } = this.props;
-
-		if ( initial )
-			store.newDeck();
 
 		return (
 			<View style={ styles.body } >

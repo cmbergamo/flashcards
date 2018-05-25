@@ -4,13 +4,13 @@ import {
 	Text,
 	View
 } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 function SideMenu ( props ) {
 	return (
 		<View style={ { backgroundColor: 'white', flexDirection: 'row' } } >
 			<TouchableOpacity style={ { flexDirection: 'row' } } onPress={ () => props.navigation.navigate( "DrawerToggle" ) } >
-				<Ionicons name="md-menu" size={ 32 } color="skyblue" />
+				<MaterialIcons name="menu" size={ 32 } color="darkblue" />
 				<Text style={ { fontSize: 22, marginLeft: 5 } } >Menu</Text>
 			</TouchableOpacity>
 		</View>
