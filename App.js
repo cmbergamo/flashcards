@@ -11,16 +11,16 @@ import {
 	Text,
 	View,
 	Button,
-	StatusBar
+	StatusBar,
+	ScrollView
 } from 'react-native';
-import Card from './Components/Card';
 import CreateCard from './Decks/CreateCard';
 import CreateDeck from './Decks/CreateDeck';
 import SideMenu from './Components/SideMenu';
 import ListDecks from './Decks/ListDecks';
 import ListNavigator from './Decks/ListNavigator';
 import Config  from './Components/Config';
-import { StackNavigator, DrawerNavigator } from 'react-navigation';
+import { StackNavigator, DrawerNavigator, DrawerItems } from 'react-navigation';
 import { Provider, inject, observer } from 'mobx-react';
 import store from './mobx/Store';
 import { load, clearLocalNotifications, setLocalNotifications, hasNotification } from './api/Storage';
@@ -41,8 +41,7 @@ class App extends Component<Props> {
 	render() {
 		return (
 			<Provider store={ store }>
-					{/* <Stack style={ styles.container } /> */}
-				<Drawer style={ { flex: 1 } } initial={ true } />
+				<Drawer style={ { flex: 1 } } />
 			</Provider>
 		);
 	}
@@ -84,7 +83,22 @@ const Drawer = DrawerNavigator ( {
 },
 {
 	initialRouteName: 'Home',
+	contentComponent: props => { return <CustomComponent {... props } /> }
 }  );
+
+const CustomComponent = ( props ) => {
+	return (
+		<ScrollView>
+			<DrawerItems {...props}
+				onItemPress={ ( { route } ) => {
+					if ( route.routeName === 'Create' )
+						store.newDeck();
+
+					props.navigation.navigate( route.routeName );
+				} } />
+		</ScrollView>
+	);
+}
 
 const styles = StyleSheet.create({
 	container: {
